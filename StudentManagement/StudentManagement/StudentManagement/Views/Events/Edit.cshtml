@@ -1,0 +1,236 @@
+﻿@model StudentManagement.Models.Students.EditEvents
+@inject SignInManager<User> signInManager
+@{ var student = User.IsInRole("Student");
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_CreateEventLayout.cshtml";
+    var users = ViewBag.User as StudentManagement.Entities.User; }
+
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <form asp-controller="Events" asp-action="Edit" method="post">
+                    @if (student)
+                    {
+        <input type="hidden" asp-for="UserId" />
+                        <input type="hidden" asp-for="EventId" />
+                                        <div class="form-group row mb-3">
+                                            <label class="control-label col-sm-2"><strong>イベント選択</strong></label>
+                                            <div class="col-sm-12">
+                                                <select asp-for="ListEventId" class="form-select" asp-items="ViewBag.ListEventId"></select>
+                                            </div>
+                                        </div>
+                                                        <div class="form-group row mb-3">
+                                                            <label class="control-label col-sm-2"><strong>学校生活での出来事</strong></label>
+                                                            <div class="col-sm-12">
+                                                                <textarea class="form-control" asp-for="Activities" style="height: 100px;"></textarea>
+                                                                <span asp-validation-for="Activities" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                                        <div class="form-group row mb-3">
+                                                                            <label class="control-label col-sm-2"><strong>自分の行動</strong></label>
+                                                                            <div class="col-sm-12">
+                                                                                <textarea class="form-control" asp-for="Act" style="height: 100px;"></textarea>
+                                                                                <span asp-validation-for="Act" class="text-danger"></span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                                        <div class="form-group row mb-3">
+                                                                                            <label class="control-label col-sm-2"><strong>発揮した力</strong></label>
+                                                                                            <div class="col-sm-12">
+                                                                                                <textarea class="form-control" asp-for="PowerExerted" style="height: 100px;"></textarea>
+                                                                                                <span asp-validation-for="PowerExerted" class="text-danger"></span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                                        <div class="form-group row mb-3">
+                                                                                                            <label class="control-label col-sm-2"><strong>伸びた能力</strong></label>
+                                                                                                            <div class="col-sm-12">
+                                                                                                                <textarea class="form-control" asp-for="PowerDev" style="height: 100px;"></textarea>
+                                                                                                                <span asp-validation-for="PowerDev" class="text-danger"></span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                            <label class="control-label col-sm-2"><strong>考えたこと</strong></label>
+                                                                                                                            <div class="col-sm-12">
+                                                                                                                                <textarea class="form-control" asp-for="Think" style="height: 100px;"></textarea>
+                                                                                                                                <span asp-validation-for="Think" class="text-danger"></span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                                        <div class="p-t-20 row">
+                                                                                                                                            <div class="col-lg-12 text-center"><button class="btn btn--radius btn-info center" type="submit">新規</button></div>
+                                                                                                                                        </div> }
+                                                                                                                                    else
+                                                                                                                                    {
+                                                                                                                        <input type="hidden" asp-for="UserId" />
+                                                                                                                                        <input type="hidden" asp-for="EventId" />
+                                                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                                                            <label class="control-label col-sm-2"><strong>イベント選択</strong></label>
+                                                                                                                                                            <div class="col-sm-12">
+                                                                                                                                                                <select asp-for="ListEventId" class="form-select" asp-items="ViewBag.ListEventId" disabled></select>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                                                                            <label class="control-label col-sm-2"><strong>学校生活での出来事</strong></label>
+                                                                                                                                                                            <div class="col-sm-12">
+                                                                                                                                                                                <textarea class="form-control" asp-for="Activities" style="height: 100px;" disabled></textarea>
+                                                                                                                                                                                <span asp-validation-for="Activities" class="text-danger"></span>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                                                                                            <label class="control-label col-sm-2"><strong>自分の行動</strong></label>
+                                                                                                                                                                                            <div class="col-sm-12">
+                                                                                                                                                                                                <textarea class="form-control" asp-for="Act" style="height: 100px;" disabled></textarea>
+                                                                                                                                                                                                <span asp-validation-for="Act" class="text-danger"></span>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                                                                                                            <label class="control-label col-sm-2"><strong>発揮した力</strong></label>
+                                                                                                                                                                                                            <div class="col-sm-12">
+                                                                                                                                                                                                                <textarea class="form-control" asp-for="PowerExerted" style="height: 100px;" disabled></textarea>
+                                                                                                                                                                                                                <span asp-validation-for="PowerExerted" class="text-danger"></span>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                                                                                                                            <label class="control-label col-sm-2"><strong>伸びた能力</strong></label>
+                                                                                                                                                                                                                            <div class="col-sm-12">
+                                                                                                                                                                                                                                <textarea class="form-control" asp-for="PowerDev" style="height: 100px;" disabled></textarea>
+                                                                                                                                                                                                                                <span asp-validation-for="PowerDev" class="text-danger"></span>
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                        <div class="form-group row mb-3">
+                                                                                                                                                                                                                                            <label class="control-label col-sm-2"><strong>考えたこと</strong></label>
+                                                                                                                                                                                                                                            <div class="col-sm-12">
+                                                                                                                                                                                                                                                <textarea class="form-control" asp-for="Think" style="height: 100px;" disabled></textarea>
+                                                                                                                                                                                                                                                <span asp-validation-for="Think" class="text-danger"></span>
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                        </div>}
+
+                </form>
+            </div>
+        </div>
+        <div class="p-2 msg-card-body">
+            @*neww*@
+            <div class="chat-body">
+                <ul class="list-unstyled" data-bind="foreach: chatMessages">
+                    <li>
+                        <div class="chat-message d-flex "
+                             data-bind="css: $data.isMine() === true ? 'ismine' : 'isother'">
+                            <div class="left-side">
+                                <img src="/images/teacher.png" class="message-avatar"
+                                     data-bind="attr: { src: $data.avatar() }" />
+                                <p class="text1" data-bind="text: $data.userName"></p>
+                            </div>
+
+                            <div class="message-content d-flex flex-column">
+
+                                <div class="bubble">
+                                    <strong style="color:black" data-bind="text: $data.userName"></strong>
+                                    <!-- ko if: $data.isEdit() == true -->
+                                    <div>
+                                        <div>
+                                            <textarea type="text" value=""
+                                                      data-bind="value: $data.content"
+                                                      placeholder="What's on your mind?"></textarea>
+                                        </div>
+                                        <div>
+                                            <button data-bind="click: $parent.updateMessage.bind($data, $data.messageId())">Sửa</button>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: $data.isEdit() == true -->
+                                    <p class="text-white" data-bind="html:$data.content"></p>
+                                    <!-- /ko -->
+
+                                    <br>
+                                    <i class="far fa-clock"></i>
+                                    <span style="font-size: small;" class="msg_time_send" data-bind="text:$data.timestamps"></span>
+                                </div>
+
+
+                                @*<div class="">
+                <span class="author" data-bind="text:$data.userName"></span>
+                <span class="timestamp">
+                    <i class="far fa-clock"></i>
+                    <span data-bind="text:$data.timestamps"></span>
+                </span>
+            </div>*@
+
+                            </div>
+                            <!-- ko if: $data.isMine() == true -->
+                            <div class="btn-group my-auto">
+                                <a href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>
+                                <ul class="dropdown-menu dropdown-custom">
+                                    <li>
+                                        <button data-bind="click: $parent.editMessage.bind($data, $data.messageId())">Sửa</button>
+                                        <button data-bind="click: $parent.deleteMessage.bind($data, $data.messageId())">Xóa</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="chat-input chat_box">
+                <div class="input-group">
+                    <textarea id="chat-message" type="text" value=""
+                              data-bind="value:message, valueUpdate: 'afterkeydown', event: { keypress: onEnter }"
+                              class="form-control shadow-none m-0" style="border-radius:12px" placeholder=". . .コメント追加"></textarea>
+
+                    <button class="actions d-flex align-items-center">
+                        <i class="fas fa-paper-plane"
+                           id="btn-send-message" data-bind="click: sendNewMessage"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#chat-message").emojioneArea({
+                search: false,
+
+            });
+        });
+    </script>
+}
+
+<style>
+    textarea {
+        resize: none;
+    }
+
+    .dropdown-custom {
+        min-width: unset !important;
+        padding: unset !important;
+    }
+
+    .reveser {
+        flex-direction: row-reverse;
+    }
+    .ismine {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+    }
+    .bubble {
+        /*background-color: #b2b2b2;
+        display: inline-block;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 15px;*/
+    }
+</style>
+

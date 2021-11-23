@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "List Student";
+
+}
+<div class="card">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-7">
+                    <input class="red_ outlinenone space-left space-right" placeholder="Search Name..." type="text">
+                    <select class="red_ outlinenone space-right" style="padding-bottom:2px" asp-items="@ViewBag.SchoolYearId">
+                    </select>
+                    <select class="red_ outlinenone space-right" style="padding-bottom:2px" asp-items="@ViewBag.ListEventId">
+                    </select>
+                    <input class="red_ outlinenone space-right" placeholder="#Skill..." type="text">
+
+                    <button class="sizeIconSearch">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead class="thead-dark" style="background-color: #3e55df; color: white">
+                <tr>
+
+                    <th class="center">
+                        学生コード
+                    </th>
+                    <th class="center">
+                        学生の名前
+                    </th>
+                    <th class="center">
+                        学年
+                    </th>
+                    <th class="center">
+                        イベント
+                    </th>
+                    <th class="center">
+                        ハッシュタグ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @if (item.Roles.Contains("Student"))
+                    {
+                        <tr class="nexturl" id="@item.UserId">
+                            <td class="center">
+                                <a style="color:black;" asp-controller="Events" asp-action="Index" asp-route-userId="@item.UserId">@Html.DisplayFor(modelItem => item.StudentCode)</a>
+                            </td>
+                            <td class="center" style="font-weight:600">
+                                <a style="color:black;" asp-controller="Events" asp-action="Index" asp-route-userId="@item.UserId">@Html.DisplayFor(modelItem => item.Username)</a>
+                            </td>
+                            <td class="center">
+                                <a style="color:black;" asp-controller="Events" asp-action="Index" asp-route-userId="@item.UserId">
+                                    @Html.DisplayFor(modelItem => item.UserSchoolYears.OrderByDescending(u => u.SchoolYearId).FirstOrDefault(m => m.UserId == item.UserId).SchoolYear.SchoolYearName)
+                                </a>
+                            </td>
+                            <td>
+
+                                @if (item.Events.Count != 0)
+                                {
+                                    var evtName = string.Empty;
+
+                                    @foreach (var evt in item.Events)
+                                    {
+                                        if (!evtName.Contains(evt.ListEvent.ListEventName))
+                                        {
+                                            evtName += " " + evt.ListEvent.ListEventName;
+                                        }
+
+                                    }
+
+                                    var listEvt = evtName.Split(" ").Skip(1);
+                                    <a style="color:black;font-weight:600" asp-controller="Events" asp-action="Index" asp-route-userId="@item.UserId">@string.Join(", ", listEvt)</a>
+                                }
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+}
